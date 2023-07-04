@@ -47,6 +47,9 @@
         <div class="noteTitle" style="margin: 3px"><span th:text="${note.title}"></span></div>
         <div class="noteContent" style="margin: 3px"><span th:text="${note.content}"></span></div>
         <div style="margin: 5px">
+            <a th:href="@{/note/edit(id=${note.id})}" class="btn btn-danger">Edit</a>
+        </div>
+        <div style="margin: 5px">
             <a th:href="@{/note/delete(id=${note.id})}" class="btn btn-danger">Delete</a>
         </div>
     </div>
