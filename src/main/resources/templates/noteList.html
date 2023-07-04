@@ -1,0 +1,19 @@
+<table>
+    <thead>
+    <tr>
+        <th> Id</th>
+        <th> Title</th>
+        <th> Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${notes.empty}">
+        <td colspan="2"> No Notes Available</td>
+    </tr>
+    <tr th:each="note : ${notes}">
+        <td><span th:text="${note.id}"> Id </span></td>
+        <td><span th:text="${note.title}"> Title </span></td>
+        <td><span th:text="${note.content}"> Content </span></td>
+    </tr>
+    </tbody>
+</table>

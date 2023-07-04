@@ -1,6 +1,6 @@
 package com.goit.todolist.service;
 
-import com.goit.todolist.Exception.ExceptionToFindNoteById;
+import com.goit.todolist.exception.ExceptionToFindNoteById;
 import com.goit.todolist.model.Note;
 import org.springframework.stereotype.Service;
 

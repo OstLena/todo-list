@@ -1,4 +1,4 @@
-package com.goit.todolist.Exception;
+package com.goit.todolist.exception;
 
 public class ExceptionToFindNoteById extends RuntimeException{
 
