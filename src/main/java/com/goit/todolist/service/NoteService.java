@@ -2,49 +2,41 @@ package com.goit.todolist.service;
 
 import com.goit.todolist.exception.ExceptionToFindNoteById;
 import com.goit.todolist.model.Note;
+import com.goit.todolist.repository.NoteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
+
 
 @Service
 public class NoteService {
-
-    private final AtomicLong counter = new AtomicLong();
-
-    private final Map<Long, Note> notesMap = new HashMap<>();
+    @Autowired
+    private NoteRepository noteRepository;
 
     public Note add(Note note) {
-        long uniqueLong = counter.incrementAndGet();
-        note.setId(uniqueLong);
-        return notesMap.put(uniqueLong, note);
+        return noteRepository.save(note);
     }
 
-    public List<Note> listAll() {
-        return notesMap.values().stream().toList();
+    public Iterable<Note> listAll() {
+        return noteRepository.findAll();
     }
 
     public void deleteById(long id) {
-        notesMap.remove(id);
+        noteRepository.deleteById(id);
     }
 
     public void update(Note note) {
-        Note update = notesMap.get(note.getId());
-        if (update != null) {
-            notesMap.put(note.getId(), note);
-        } else {
-            throw new ExceptionToFindNoteById(note.getId());
-        }
+        getById(note.getId());
+        noteRepository.save(note);
     }
 
     public Note getById(long id) {
-        Note note = notesMap.get(id);
-        if (note != null) {
-            return note;
+        Optional<Note> note = noteRepository.findById(id);
+        if (note.isPresent()) {
+            return note.get();
         } else {
-            throw new ExceptionToFindNoteById(note.getId());
+            throw new ExceptionToFindNoteById(id);
         }
     }
 }
