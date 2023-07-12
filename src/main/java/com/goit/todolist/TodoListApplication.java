@@ -13,10 +13,6 @@ import java.io.IOException;
 @SpringBootApplication
 public class TodoListApplication implements CommandLineRunner {
 
-    @Autowired
-    private NoteService noteService;
-
-
     public static void main(String[] args) {
 
         SpringApplication.run(TodoListApplication.class, args);
@@ -28,6 +24,5 @@ public class TodoListApplication implements CommandLineRunner {
         new FlywayConfigurations()
                 .setup()
                 .migrate();
-
     }
 }
